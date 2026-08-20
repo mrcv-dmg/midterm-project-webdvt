@@ -13,14 +13,10 @@ function App(){
   return(
     <BrowserRouter>
     <Routes>
-      <Route path = "/" element={
-        <Dashboard />} />
-      <Route path = "/addTransaction" element={
-        <AddTransaction />} />
-      <Route path = "/transactionDetail" element={
-        <TransactionDetail />} />
-      <Route path = "/summary" element={
-        <Summary />} />
+      <Route path = "/" element={<Dashboard />} />
+      <Route path = "/addTransaction" element={<AddTransaction />} />
+      <Route path = "/transactionDetail" element={<TransactionDetail />} />
+      <Route path = "/summary" element={<Summary />} />
     </Routes>
   </BrowserRouter>
   );
