@@ -1,8 +1,9 @@
-import { useState } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import {useState} from "react";
+import { NavLink, useNavigate} from "react-router-dom";
 import Navbar from "@/components/ui/navbar";
-import { Button, buttonVariants } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import {Button, buttonVariants} from "@/components/ui/button";
+import {Input} from "@/components/ui/input";
+import {useTransactions} from "@/context/transactionContext";
 import {
   Field,
   FieldContent,
@@ -18,7 +19,7 @@ const categories = ["Food", "Transport", "Utilities", "Income", "Other"];
 
 const initialForm = {
   description: "",
-  amount: "",
+  amount: "",   
   category: "",
   type: "expense",
   date: "",
@@ -29,6 +30,7 @@ const selectClassName =
 
 export default function AddTransaction() {
   const navigate = useNavigate();
+  const { addTransaction } = useTransactions();
   const [form, setForm] = useState(initialForm);
   const [errors, setErrors] = useState({});
 
@@ -52,7 +54,13 @@ export default function AddTransaction() {
     setErrors(nextErrors);
     if (Object.keys(nextErrors).length > 0) return;
 
-    console.log("New transaction:", form);
+    addTransaction({
+      description: form.description.trim(),
+      amount: Number(form.amount),
+      category: form.category,
+      type: form.type,
+      date: form.date,
+    });
     setForm(initialForm);
     navigate("/");
   }
@@ -64,7 +72,7 @@ export default function AddTransaction() {
       <form
         onSubmit={handleSubmit}
         noValidate
-        className="mx-auto mt-15 max-w-xl rounded-[min(var(--radius-4xl),24px)] border border-border bg-card p-6 shadow-sm sm:p-8"
+        className="mx-auto mt-10 max-w-xl rounded-[min(var(--radius-4xl),24px)] border border-border bg-card p-6 shadow-sm sm:p-8"
       >
         <FieldSet>
           <FieldLegend>New transaction</FieldLegend>
@@ -73,6 +81,7 @@ export default function AddTransaction() {
           <FieldGroup>
             <Field data-invalid={!!errors.description}>
               <FieldLabel htmlFor="description">Description</FieldLabel>
+
               <Input
                 id="description"
                 placeholder="e.g. Grab ride"
@@ -80,6 +89,7 @@ export default function AddTransaction() {
                 onChange={(e) => updateField("description", e.target.value)}
                 aria-invalid={!!errors.description}
               />
+
               {errors.description && <FieldError>{errors.description}</FieldError>}
             </Field>
 
@@ -101,8 +111,9 @@ export default function AddTransaction() {
             <Field orientation="responsive">
               <FieldContent>
                 <FieldLabel htmlFor="type">Type</FieldLabel>
-                <FieldDescription>Is this money in or money out?</FieldDescription>
+                <FieldDescription>Is this an expense or income?</FieldDescription>
               </FieldContent>
+
               <select
                 id="type"
                 className={selectClassName}

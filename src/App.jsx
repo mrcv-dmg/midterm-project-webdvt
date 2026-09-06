@@ -8,9 +8,11 @@ import Dashboard from "./pages/dashboard";
 import AddTransaction from "./pages/addTransaction";
 import TransactionDetail from "./pages/transactionDetail";
 import Summary from "./pages/summary";
+import {TransactionProvider} from "@/context/transactionContext";
 
 function App(){
   return(
+    <TransactionProvider>
     <BrowserRouter>
     <Routes>
       <Route path = "/" element={<Dashboard />} />
@@ -19,7 +21,8 @@ function App(){
       <Route path = "/summary" element={<Summary />} />
     </Routes>
   </BrowserRouter>
+  </TransactionProvider>
   );
 }
 
-export default App;
+export default App; 
