@@ -1,5 +1,5 @@
 import {useState} from "react";
-import { NavLink, useNavigate} from "react-router-dom";
+import {NavLink, useNavigate} from "react-router-dom";
 import Navbar from "@/components/ui/navbar";
 import {Button, buttonVariants} from "@/components/ui/button";
 import {Input} from "@/components/ui/input";
@@ -81,7 +81,6 @@ export default function AddTransaction() {
           <FieldGroup>
             <Field data-invalid={!!errors.description}>
               <FieldLabel htmlFor="description">Description</FieldLabel>
-
               <Input
                 id="description"
                 placeholder="e.g. Grab ride"
@@ -89,7 +88,6 @@ export default function AddTransaction() {
                 onChange={(e) => updateField("description", e.target.value)}
                 aria-invalid={!!errors.description}
               />
-
               {errors.description && <FieldError>{errors.description}</FieldError>}
             </Field>
 
@@ -113,7 +111,6 @@ export default function AddTransaction() {
                 <FieldLabel htmlFor="type">Type</FieldLabel>
                 <FieldDescription>Is this an expense or income?</FieldDescription>
               </FieldContent>
-
               <select
                 id="type"
                 className={selectClassName}

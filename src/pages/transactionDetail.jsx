@@ -8,7 +8,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { useTransactions } from "@/context/TransactionContext";
+import {useTransactions} from "@/context/transactionContext";
 
 function formatPHP(amount) {
   return new Intl.NumberFormat("en-PH", {

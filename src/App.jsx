@@ -17,9 +17,9 @@ function App(){
     <Routes>
       <Route path = "/" element={<Dashboard />} />
       <Route path = "/addTransaction" element={<AddTransaction />} />
-      <Route path = "/transactionDetail" element={<TransactionDetail />} />
+      <Route path="/transactionDetail/:id" element={<TransactionDetail />} />
       <Route path = "/summary" element={<Summary />} />
-      
+
     </Routes>
   </BrowserRouter>
   </TransactionProvider>
