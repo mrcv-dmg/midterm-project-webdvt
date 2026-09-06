@@ -1,5 +1,5 @@
-import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
-import { useTransactions } from "@/context/transactionContext";
+import {Card, CardHeader, CardTitle, CardContent} from "@/components/ui/card";
+import {useTransactions} from "@/context/transactionContext";
 
 function formatPHP(amount) {
   return new Intl.NumberFormat("en-PH", {

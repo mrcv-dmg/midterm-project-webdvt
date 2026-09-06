@@ -1,5 +1,6 @@
-import {Card, CardHeader, CardTitle, CardContent} from "@/components/ui/card";
-import {useTransactions} from "@/context/transactionContext";
+import { Link } from "react-router-dom";
+import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
+import { useTransactions } from "@/context/TransactionContext";
 
 function formatPHP(amount) {
   return new Intl.NumberFormat("en-PH", {
@@ -27,7 +28,6 @@ export default function TransactionList() {
       <CardHeader>
         <CardTitle>Recent transactions</CardTitle>
       </CardHeader>
-
       <CardContent>
         {sorted.length === 0 ? (
           <p className="py-6 text-center text-sm text-muted-foreground">
@@ -36,26 +36,28 @@ export default function TransactionList() {
         ) : (
           <ul className="divide-y divide-border">
             {sorted.map((t) => (
-              <li
-                key={t.id}
-                className="flex items-center justify-between py-3 first:pt-0 last:pb-0"
-              >
-                <div>
-                  <p className="font-medium">{t.description}</p>
-                  <p className="text-xs text-muted-foreground">
-                    {t.category} · {formatShortDate(t.date)}
-                  </p>
-                </div>
-                <p
-                  className={
-                    t.type === "expense"
-                      ? "font-medium text-destructive"
-                      : "font-medium text-foreground"
-                  }
+              <li key={t.id}>
+                <Link
+                  to={`/transactionDetail/${t.id}`}
+                  className="-mx-2 flex items-center justify-between rounded-2xl px-2 py-3 transition-colors hover:bg-muted"
                 >
-                  {t.type === "expense" ? "-" : "+"}
-                  {formatPHP(t.amount)}
-                </p>
+                  <div>
+                    <p className="font-medium">{t.description}</p>
+                    <p className="text-xs text-muted-foreground">
+                      {t.category} · {formatShortDate(t.date)}
+                    </p>
+                  </div>
+                  <p
+                    className={
+                      t.type === "expense"
+                        ? "font-medium text-destructive"
+                        : "font-medium text-foreground"
+                    }
+                  >
+                    {t.type === "expense" ? "-" : "+"}
+                    {formatPHP(t.amount)}
+                  </p>
+                </Link>
               </li>
             ))}
           </ul>

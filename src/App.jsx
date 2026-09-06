@@ -19,6 +19,7 @@ function App(){
       <Route path = "/addTransaction" element={<AddTransaction />} />
       <Route path = "/transactionDetail" element={<TransactionDetail />} />
       <Route path = "/summary" element={<Summary />} />
+      
     </Routes>
   </BrowserRouter>
   </TransactionProvider>
