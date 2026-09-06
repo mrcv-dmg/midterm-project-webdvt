@@ -14,7 +14,7 @@ export default function About() {
           {"Dane Marco Bilog"}
           <p>
             This Personal Budget Tracker was built as a Web Development
-            midterm project by [Dane Marco Bilog].
+            midterm project by Dane Marco Bilog.
           </p>
           <p>
             It's built with React, React Router, Tailwind CSS, and shadcn/ui

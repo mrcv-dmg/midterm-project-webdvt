@@ -1,6 +1,6 @@
 import {Link} from "react-router-dom";
 import {Card, CardHeader, CardTitle, CardContent} from "@/components/ui/card";
-import {useTransactions} from "@/context/transactionContext";
+import {useTransactions} from "@/hooks/useTransactions";
 
 function formatPHP(amount) {
   return new Intl.NumberFormat("en-PH", {

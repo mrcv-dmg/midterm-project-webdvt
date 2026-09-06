@@ -1,8 +1,6 @@
-import {createContext, useContext, useEffect, useState} from "react";
+import {createContext, useEffect, useState} from "react";
 
 const STORAGE_KEY = "budget-tracker:transactions";
-
-const seedTransactions = [];
 
 function loadInitialTransactions() {
   try {
@@ -11,12 +9,12 @@ function loadInitialTransactions() {
   } catch (error) {
     console.error("Failed to read transactions from localStorage:", error);
   }
-  return seedTransactions;
+  return [];
 }
 
-const TransactionContext = createContext(null);
+export const TransactionContext = createContext(null);
 
-export function TransactionProvider({ children }) {
+export function TransactionProvider({children}) {
   const [transactions, setTransactions] = useState(loadInitialTransactions);
 
   useEffect(() => {
@@ -40,8 +38,9 @@ export function TransactionProvider({ children }) {
   function getTransaction(id) {
     return transactions.find((t) => t.id === id);
   }
+
   function resetTransactions() {
-    setTransactions(seedTransactions);
+    setTransactions([]);
   }
 
   const value = {
@@ -57,12 +56,4 @@ export function TransactionProvider({ children }) {
       {children}
     </TransactionContext.Provider>
   );
-}
-
-export function useTransactions() {
-  const context = useContext(TransactionContext);
-  if (!context) {
-    throw new Error("useTransactions must be used within a TransactionProvider");
-  }
-  return context;
 }

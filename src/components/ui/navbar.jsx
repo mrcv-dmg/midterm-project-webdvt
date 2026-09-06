@@ -1,5 +1,5 @@
-import { Link, NavLink } from "react-router-dom";
-import { Button, buttonVariants } from "@/components/ui/button";
+import {Link, NavLink} from "react-router-dom";
+import {Button, buttonVariants} from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -11,12 +11,12 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { useTheme } from "@/context/themeContext";
-import { useTransactions } from "@/context/transactionContext";
+import {useTheme} from "@/hooks/useTheme";
+import {useTransactions} from "@/hooks/useTransactions";
 
 const navLinks = [
-  { to: "/", label: "Dashboard", end: true },
-  { to: "/summary", label: "Summary", end: false },
+  {to: "/", label: "Dashboard", end: true},
+  {to: "/summary", label: "Summary", end: false},
 ];
 
 export default function Navbar() {
@@ -25,7 +25,7 @@ export default function Navbar() {
 
   function handleReset() {
     const confirmed = window.confirm(
-      "Reset all transactions? This can't be undone."
+      "Clear all transactions? This can't be undone."
     );
     if (confirmed) resetTransactions();
   }
@@ -51,33 +51,43 @@ export default function Navbar() {
             >
               {link.label}
             </NavLink>
-              )
-            )
-          }
+          ))}
         </div>
 
         <div className="flex items-center gap-2">
           <DropdownMenu>
             <DropdownMenuTrigger
-              render={<Button variant="ghost" size="capsule" aria-label="Settings menu" />}
+              render={<Button variant="ghost" size="icon" aria-label="Settings menu" />}
             >
-              Options
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+              >
+                <line x1="4" y1="6" x2="20" y2="6" />
+                <line x1="4" y1="12" x2="20" y2="12" />
+                <line x1="4" y1="18" x2="20" y2="18" />
+              </svg>
             </DropdownMenuTrigger>
-
-            <DropdownMenuContent align="end">
+            <DropdownMenuContent
+              side="right"
+              align="start"
+              className="border border-border bg-popover text-popover-foreground"
+            >
               <DropdownMenuGroup>
                 <DropdownMenuLabel>Appearance</DropdownMenuLabel>
                 <DropdownMenuRadioGroup value={theme} onValueChange={setTheme}>
                   <DropdownMenuRadioItem value="light">Light</DropdownMenuRadioItem>
                   <DropdownMenuRadioItem value="dark">Dark</DropdownMenuRadioItem>
                 </DropdownMenuRadioGroup>
-
               </DropdownMenuGroup>
               <DropdownMenuSeparator />
-
               <DropdownMenuItem render={<Link to="/about" />}>About</DropdownMenuItem>
               <DropdownMenuSeparator />
-              
               <DropdownMenuItem variant="destructive" onClick={handleReset}>
                 Reset transactions
               </DropdownMenuItem>

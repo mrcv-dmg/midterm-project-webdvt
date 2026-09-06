@@ -3,7 +3,7 @@ import {NavLink, useNavigate} from "react-router-dom";
 import Navbar from "@/components/ui/navbar";
 import {Button, buttonVariants} from "@/components/ui/button";
 import {Input} from "@/components/ui/input";
-import {useTransactions} from "@/context/transactionContext";
+import {useTransactions} from "@/hooks/useTransactions";
 import {
   Field,
   FieldContent,
@@ -19,7 +19,7 @@ const categories = ["Food", "Transport", "Utilities", "Income", "Other"];
 
 const initialForm = {
   description: "",
-  amount: "",   
+  amount: "",
   category: "",
   type: "expense",
   date: "",
@@ -35,7 +35,7 @@ export default function AddTransaction() {
   const [errors, setErrors] = useState({});
 
   function updateField(field, value) {
-    setForm((prev) => ({ ...prev, [field]: value }));
+    setForm((prev) => ({...prev, [field]: value}));
   }
 
   function validate() {
@@ -109,7 +109,7 @@ export default function AddTransaction() {
             <Field orientation="responsive">
               <FieldContent>
                 <FieldLabel htmlFor="type">Type</FieldLabel>
-                <FieldDescription>Is this an expense or income?</FieldDescription>
+                <FieldDescription>Is this income or expense?</FieldDescription>
               </FieldContent>
               <select
                 id="type"

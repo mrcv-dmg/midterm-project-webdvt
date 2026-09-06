@@ -8,8 +8,8 @@ import Dashboard from "./pages/dashboard";
 import AddTransaction from "./pages/addTransaction";
 import TransactionDetail from "./pages/transactionDetail";
 import Summary from "./pages/summary";
-import {TransactionProvider} from "@/context/transactionContext";
-import { ThemeProvider } from "@/context/themeContext";
+import {TransactionProvider} from "@/hooks/transactionContext";
+import { ThemeProvider } from "@/hooks/themeContext";
 import About from "./pages/about";
 
 function App(){

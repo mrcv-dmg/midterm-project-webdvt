@@ -1,5 +1,5 @@
 import {Card, CardHeader, CardTitle, CardContent} from "@/components/ui/card";
-import {useTransactions} from "@/context/transactionContext";
+import {useTransactions} from "@/hooks/useTransactions";
 
 function formatPHP(amount) {
   return new Intl.NumberFormat("en-PH", {
@@ -29,7 +29,6 @@ export default function SummaryCards() {
             Balance
           </CardTitle>
         </CardHeader>
-
         <CardContent>
           <p className="font-heading text-2xl font-semibold">{formatPHP(balance)}</p>
         </CardContent>
@@ -41,7 +40,6 @@ export default function SummaryCards() {
             Income
           </CardTitle>
         </CardHeader>
-
         <CardContent>
           <p className="font-heading text-2xl font-semibold">
             +{formatPHP(income)}
@@ -59,7 +57,6 @@ export default function SummaryCards() {
           <p className="font-heading text-2xl font-semibold text-destructive">
             -{formatPHP(expenses)}
           </p>
-          
         </CardContent>
       </Card>
     </section>

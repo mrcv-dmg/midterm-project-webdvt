@@ -8,7 +8,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import {useTransactions} from "@/context/transactionContext";
+import { useTransactions } from "@/hooks/useTransactions";
 
 function formatPHP(amount) {
   return new Intl.NumberFormat("en-PH", {
@@ -26,9 +26,9 @@ function formatFullDate(dateString) {
 }
 
 export default function TransactionDetail() {
-  const { id } = useParams();
+  const {id} = useParams();
   const navigate = useNavigate();
-  const { getTransaction, deleteTransaction } = useTransactions();
+  const {getTransaction, deleteTransaction} = useTransactions();
   const transaction = getTransaction(id);
 
   function handleDelete() {
