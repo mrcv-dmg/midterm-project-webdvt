@@ -3,6 +3,7 @@
 @import "tw-animate-css";
 @import "@fontsource-variable/inter";
 @import "@fontsource-variable/merriweather";
+@import "./context/themeContext.css";
 
 @custom-variant dark (&:is(.dark *));
 

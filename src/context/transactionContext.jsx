@@ -1,14 +1,8 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import {createContext, useContext, useEffect, useState} from "react";
 
 const STORAGE_KEY = "budget-tracker:transactions";
 
-const seedTransactions = [
-  { id: "1", description: "Freelance payment", category: "Income", date: "2026-08-18", amount: 8500, type: "income" },
-  { id: "2", description: "Jollibee - lunch", category: "Food", date: "2026-08-18", amount: 215, type: "expense" },
-  { id: "3", description: "Grab ride", category: "Transport", date: "2026-08-17", amount: 180, type: "expense" },
-  { id: "4", description: "Electric bill", category: "Utilities", date: "2026-08-15", amount: 1450, type: "expense" },
-  { id: "5", description: "Allowance", category: "Income", date: "2026-08-10", amount: 5000, type: "income" },
-];
+const seedTransactions = [];
 
 function loadInitialTransactions() {
   try {
@@ -46,8 +40,17 @@ export function TransactionProvider({ children }) {
   function getTransaction(id) {
     return transactions.find((t) => t.id === id);
   }
+  function resetTransactions() {
+    setTransactions(seedTransactions);
+  }
 
-  const value = { transactions, addTransaction, deleteTransaction, getTransaction };
+  const value = {
+    transactions,
+    addTransaction,
+    deleteTransaction,
+    getTransaction,
+    resetTransactions,
+  };
 
   return (
     <TransactionContext.Provider value={value}>
