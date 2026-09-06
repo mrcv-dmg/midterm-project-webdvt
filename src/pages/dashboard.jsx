@@ -5,7 +5,7 @@ import TransactionList from "@/components/ui/transactionlist";
 
 export default function Dashboard() {
   return (
-    <main className="container mx-auto max-w-6xl p-6 space-y-6">
+    <main className="container mx-auto max-w-6xl space-y-6 p-6">
       <Navbar />
       <Header />
       <SummaryCards />

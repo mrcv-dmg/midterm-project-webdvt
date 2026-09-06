@@ -1,5 +1,13 @@
-import {Card, CardHeader, CardTitle, CardContent} from "@/components/ui/card";
-import {useTransactions} from "@/hooks/useTransactions";
+import { memo, useMemo } from "react";
+
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+
+import { useTransactions } from "@/hooks/useTransactions";
 
 function formatPHP(amount) {
   return new Intl.NumberFormat("en-PH", {
@@ -8,38 +16,53 @@ function formatPHP(amount) {
   }).format(amount);
 }
 
-export default function SummaryCards() {
+function SummaryCards() {
   const { transactions } = useTransactions();
 
-  const income = transactions
-    .filter((t) => t.type === "income")
-    .reduce((sum, t) => sum + t.amount, 0);
+  const { income, expenses, balance } = useMemo(() => {
+    let totalIncome = 0;
+    let totalExpenses = 0;
 
-  const expenses = transactions
-    .filter((t) => t.type === "expense")
-    .reduce((sum, t) => sum + t.amount, 0);
+    transactions.forEach((transaction) => {
+      if (transaction.type === "income") {
+        totalIncome += transaction.amount;
+      }
 
-  const balance = income - expenses;
+      if (transaction.type === "expense") {
+        totalExpenses += transaction.amount;
+      }
+    });
+
+    return {
+      income: totalIncome,
+      expenses: totalExpenses,
+      balance: totalIncome - totalExpenses,
+    };
+  }, [transactions]);
 
   return (
     <section className="grid grid-cols-1 gap-4 sm:grid-cols-3">
       <Card>
         <CardHeader>
-          <CardTitle className="text-xs font-sans font-medium uppercase tracking-wide text-muted-foreground">
+          <CardTitle className="font-sans text-xs font-medium uppercase tracking-wide text-muted-foreground">
             Balance
           </CardTitle>
         </CardHeader>
+
         <CardContent>
-          <p className="font-heading text-2xl font-semibold">{formatPHP(balance)}</p>
+          <p className="font-heading text-2xl font-semibold">
+            {formatPHP(balance)}
+          </p>
         </CardContent>
       </Card>
 
       <Card>
         <CardHeader>
-          <CardTitle className="text-xs font-sans font-medium uppercase tracking-wide text-muted-foreground">
+          <CardTitle className="font-sans text-xs font-medium uppercase tracking-wide text-muted-foreground">
             Income
           </CardTitle>
         </CardHeader>
+
         <CardContent>
           <p className="font-heading text-2xl font-semibold">
             +{formatPHP(income)}
@@ -49,10 +72,11 @@ export default function SummaryCards() {
 
       <Card>
         <CardHeader>
-          <CardTitle className="text-xs font-sans font-medium uppercase tracking-wide text-muted-foreground">
+          <CardTitle className="font-sans text-xs font-medium uppercase tracking-wide text-muted-foreground">
             Expenses
           </CardTitle>
         </CardHeader>
+
         <CardContent>
           <p className="font-heading text-2xl font-semibold text-destructive">
             -{formatPHP(expenses)}
@@ -62,3 +86,5 @@ export default function SummaryCards() {
     </section>
   );
 }
+
+export default memo(SummaryCards);
