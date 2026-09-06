@@ -10,14 +10,15 @@ export default function About() {
         <CardHeader>
           <CardTitle className="font-heading text-xl">About this project</CardTitle>
         </CardHeader>
-        <CardContent className="space-y-3 text-sm text-muted-foreground">
+        <CardContent className="space-y-3 text-l text-muted-foreground">
           {"Dane Marco Bilog"}
           <p>
+            <br/>
             This Personal Budget Tracker was built as a Web Development
-            midterm project by Dane Marco Bilog.
+            midterm project by Dane.
           </p>
           <p>
-            It's built with React, React Router, Tailwind CSS, and shadcn/ui
+            Built with React, React Router, Tailwind CSS, using shadcn/ui
             components on top of Base UI. Transaction data is stored locally
             in your browser, so it stays on this device.
           </p>
